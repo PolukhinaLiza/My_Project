@@ -1,12 +1,20 @@
-import { LogicalElement } from './components/LogicalElement';
-import { logicalElement1, logicalElement2, logicalElement3 } from './fixtures';
+import { Menu } from './Menu/Menu';
+import { useState } from 'react';
+import { GridElements } from './components/GridElements';
 
 const App = () => {
+	const [elementsOnGrid, updateElementsOnGrid] = useState([]);
+	//const elementStyle = {
+	//	display: 'flex',
+	//	flexDirection: 'row',
+	//};
+	const addElement = (id, props) => {
+		updateElementsOnGrid([...elementsOnGrid, { id, props }]);
+	};
 	return (
 		<div>
-			<LogicalElement {...logicalElement1} />
-			<LogicalElement {...logicalElement2} />
-			<LogicalElement {...logicalElement3} />
+			<Menu addElement={addElement} />
+			{elementsOnGrid.length? <GridElements gridElements={elementsOnGrid}/> : null}
 		</div>
 	);
 };

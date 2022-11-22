@@ -1,17 +1,17 @@
 export const logicalElement1 = {
     elementType: 'and',
-    isInversed: 'false',
+    isInversed: false,
     inputsCount: 2,
 };
 
 export const logicalElement2 = {
     elementType: 'or',
-    isInversed: 'true',
+    isInversed: true,
     inputsCount: 1,  
 };
 
 export const logicalElement3 = {
     elementType: 'xor',
-    isInversed: 'true',
+    isInversed: true,
     inputsCount: 2,  
 }
