@@ -101,7 +101,7 @@ export const ItemSettings = (props) => {
 		<form
 			onSubmit={(e) => {
 				e.preventDefault();
-				const options = {};
+				const options = { elementName: itemId };
 				formTemplates[itemId].forEach((inputInfo) => {
 					const input = e.target[inputInfo.fieldName];
 					options[inputInfo.fieldName] =
@@ -111,7 +111,8 @@ export const ItemSettings = (props) => {
 							? parseInt(input.value)
 							: input.value;
 				});
-				addElement(itemId, options);
+				console.log(addElement, 'sgadfgd')
+				addElement(options);
 			}}>
 			{formTemplates[itemId].map((inputInfo) => (
 				<div>

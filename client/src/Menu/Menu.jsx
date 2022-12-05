@@ -11,8 +11,8 @@ export const Menu = (props) => {
 			{selectedElement && (
 				<ItemSettings
 					itemId={selectedElement}
-					addElement={(id, props) => {
-						addElement(id, props);
+					addElement={(props) => {
+						addElement(props);
 						selectElement(null);
 					}}
 				/>

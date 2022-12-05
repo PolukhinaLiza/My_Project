@@ -16,7 +16,11 @@ export const GridElements = (props) => {
 			{gridElements.map((elementInfo) => {
 				switch (elementInfo.id) {
 					case 'logicalElement':
-						return <LogicalElement {...elementInfo.props} />;
+						return (
+							<div>
+								<LogicalElement {...elementInfo.props} />
+							</div>
+						);
 					case 'decoder':
 						return <Decoder {...elementInfo.props} />;
 					case 'multiplexer':
