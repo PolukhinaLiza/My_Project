@@ -1,3 +1,4 @@
+import { inputOutputStyleHR, inputStyleDiv, outputStyleDiv, elementContainerStyle } from "./Style";
 export const LogicalElement = (props) => {
 	const { elementType, isInversed, inputsCount } = props;
 	console.log(props);
@@ -8,11 +9,6 @@ export const LogicalElement = (props) => {
 		height: heightStyle + 'px',
 		border: '1px solid black',
 		textAlign: 'right',
-	};
-
-	const elementContainerStyle = {
-		display: 'flex',
-		flexDirection: 'row',
 	};
 
 	const elementTypeGOST = () => {
@@ -26,25 +22,6 @@ export const LogicalElement = (props) => {
 			default:
 				return null;
 		}
-	};
-
-	const inputOutputStyleHR = {
-		width: '10px',
-		border: '1px solid black',
-	};
-
-	const inputStyleDiv = {
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-		justifyContent: 'space-around',
-	};
-
-	const outputStyleDiv = {
-		display: 'flex',
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-around',
 	};
 
 	const notStyle = {

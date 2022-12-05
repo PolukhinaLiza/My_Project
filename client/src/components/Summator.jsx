@@ -1,9 +1,7 @@
 import { inputOutputStyleHR, inputStyleDiv, elementContainerStyle  } from "./Style";
-export const Decoder = (props) => {
+export const Multiplexer = (props) => {
 	const { elementType, isSynchro, inputsCount } = props;
 	console.log(props);
-	const outputsCount =
-		elementType === 'DC' ? inputsCount ** 2 : Math.ceil(Math.sqrt(inputsCount));
 	const heightStyle = 200 + 5 * inputsCount;
 	const tableStyle = {
 		display: 'table',
@@ -40,9 +38,7 @@ export const Decoder = (props) => {
 				<div style={tdBokStyle}></div>
 			</div>
 			<div style={inputStyleDiv}>
-				{[...new Array(outputsCount).keys()].map((i) => (
-					<hr style={inputOutputStyleHR} key={`input${i}`} />
-				))}
+				<hr style={inputOutputStyleHR} />
 			</div>
 		</div>
 	);

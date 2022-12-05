@@ -33,6 +33,11 @@ export const ItemSettings = (props) => {
 					{ label: 'Дешифратор', value: 'DC' },
 				],
 			},
+			//{
+			//	fieldName: 'isSynchro',
+			//	label: 'Синхронный ли элемент ?',
+			//	fieldType: 'checkbox'
+			//},
 			{
 				fieldName: 'inputsCount',
 				label: 'Количество входов',
@@ -45,8 +50,8 @@ export const ItemSettings = (props) => {
 				label: 'Мультиплексор или Демультиплексор?',
 				fieldType: 'select',
 				options: [
-					{ label: 'Мультиплексор', value: 'MUX' },
-					{ label: 'Демультиплексор', value: 'DMX' },
+					{ label: 'Мультиплексор', value: 'MS' },
+					{ label: 'Демультиплексор', value: 'DMS' },
 				],
 			},
 			{
@@ -64,9 +69,31 @@ export const ItemSettings = (props) => {
 					{ label: 'D-триггер', value: 'D' },
 					{ label: 'RS-триггер', value: 'RS' },
 					{ label: 'JK-триггер', value: 'JK' },
-					{ label: 'T-триггер', value: 'JK' },
-					{ label: 'DV-триггер', value: 'JK' },
+					{ label: 'T-триггер', value: 'T' },
 				],
+			},
+			{
+				fieldName: 'isSynchro',
+				label: 'Синхронный ли триггер?',
+				fieldType: 'checkbox',
+			},
+		],
+		counter: [
+			{
+				fieldName: 'elementType',
+				label: 'Тип триггера',
+				fieldType: 'select',
+				options: [
+					{ label: 'D-триггер', value: 'D' },
+					{ label: 'RS-триггер', value: 'RS' },
+					{ label: 'JK-триггер', value: 'JK' },
+					{ label: 'T-триггер', value: 'T' },
+				],
+			},
+			{
+				fieldName: 'isSynchro',
+				label: 'Синхронный ли триггер?',
+				fieldType: 'checkbox',
 			},
 		],
 	};

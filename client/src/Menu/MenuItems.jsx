@@ -8,7 +8,9 @@ export const MenuItems = (props) => {
 		{ label: 'Выбраь мультиплексор/демультиплексор', id: 'multiplexer'},
 		{ label: 'Выбрать триггер', id: 'trigger'},
 		{ label: 'Выбрать счетчик', id:'counter'},
-		{ label: 'Выбрать резистор', id: 'resistor'}
+		{ label: 'Выбрать регистр', id: 'registor'},
+		{ label: 'Выбрать компаратор', id: 'comparator'},
+		{ label: 'Выбрать сумматор', id: 'summator'}
 	];
 
 	return (
