@@ -1,5 +1,3 @@
-import './Menu.css';
-
 export const MenuItems = (props) => {
 	const { selectElement } = props;
 	const availableElements = [
@@ -12,13 +10,13 @@ export const MenuItems = (props) => {
 		{ label: 'Выбрать компаратор', id: 'comparator'},
 		{ label: 'Выбрать сумматор', id: 'summator'}
 	];
-
+	//dropdown-toggle
 	return (
-		<nav class='one'>
-			<ul>
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<ul class="navbar-nav">
 				{availableElements.map((element) => (
-					<li key={element.id}>
-						<button onClick={() => selectElement(element.id)}>
+					<li class="nav-item active" key={element.id}>
+						<button class="btn btn-dark " onClick={() => selectElement(element.id)}>
 							{element.label}
 						</button>
 					</li>

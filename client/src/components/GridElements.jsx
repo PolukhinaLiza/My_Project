@@ -2,11 +2,6 @@ import React, { useEffect } from 'react';
 import { useCallback, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import update from 'react-addons-update';
-import { useDrag } from 'react-dnd';
-import { LogicalElement } from './LogicalElement';
-import { Decoder } from './Decoder';
-import { Multiplexer } from './Multiplexer';
-import { Trigger } from './Trigger';
 import { DraggableElement } from './DraggablElement';
 
 const styles = {
@@ -59,22 +54,4 @@ export const GridElements = (props) => {
 			))}
 		</div>
 	);
-	// return (
-	// 	<div>
-	// 		{gridElements.map((elementInfo) => {
-	// 			switch (elementInfo.id) {
-	// 				case 'logicalElement':
-	// 					return <LogicalElement {...elementInfo.props} />;
-	// 				case 'decoder':
-	// 					return <Decoder {...elementInfo.props} />;
-	// 				case 'multiplexer':
-	// 					return <Multiplexer {...elementInfo.props} />;
-	// 				case 'trigger':
-	// 					return <Trigger {...elementInfo.props} />;
-	// 				default:
-	// 					return null;
-	// 			}
-	// 		})}
-	// 	</div>
-	// );
 };

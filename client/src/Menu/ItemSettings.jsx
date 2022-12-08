@@ -1,5 +1,12 @@
 export const ItemSettings = (props) => {
 	const { itemId, addElement } = props;
+	const styleElement = {
+		margin: '10px',
+	};
+	const styleFormElement = {
+		margin: '10px',
+		border: '1px solid black',
+	};
 	const formTemplates = {
 		logicalElement: [
 			{
@@ -97,8 +104,11 @@ export const ItemSettings = (props) => {
 			},
 		],
 	};
+	//class="dropdown-menu"
 	return (
 		<form
+			class='px-4 py-3'
+			style={styleFormElement}
 			onSubmit={(e) => {
 				e.preventDefault();
 				const options = {};
@@ -114,10 +124,13 @@ export const ItemSettings = (props) => {
 				addElement({ elementType: itemId, options });
 			}}>
 			{formTemplates[itemId].map((inputInfo) => (
-				<div>
-					<label>{inputInfo.label}</label>
+				<div class='form-group'>
+					<label style={styleElement}>{inputInfo.label}</label>
 					{inputInfo.fieldType === 'select' ? (
-						<select name={inputInfo.fieldName}>
+						<select
+							style={styleElement}
+							class='btn btn-outline-light active dropdown-toggle-split'
+							name={inputInfo.fieldName}>
 							{inputInfo.options.map((option, i) => (
 								<option
 									key={'option_' + i}
@@ -130,12 +143,15 @@ export const ItemSettings = (props) => {
 					) : (
 						//TODO:  Добавить валидацию Добавить значение по умолчанию
 						<input
+							style={styleElement}
 							name={inputInfo.fieldName}
 							type={inputInfo.fieldType}></input>
 					)}
 				</div>
 			))}
-			<button type='submit'>Добавить элемент</button>
+			<button type='submit' class='btn btn-outline-dark'>
+				Добавить элемент
+			</button>
 		</form>
 	);
 };

@@ -1,6 +1,9 @@
 export const inputOutputStyleHR = {
     width: '10px',
-    border: '1px solid black',
+    border: '1px solid black !important',
+    color: '#000 !important',
+    margin: '5px 0',
+    opacity: '1'
 };
 
 export const inputStyleDiv = {
