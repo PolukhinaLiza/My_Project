@@ -5,7 +5,7 @@ export const MenuItems = (props) => {
 	const availableElements = [
 		{ label: 'Выбрать логический элемент', id: 'logicalElement' },
 		{ label: 'Выбрать дешифратор/шифратор', id: 'decoder'},
-		{ label: 'Выбраь мультиплексор/демультиплексор', id: 'multiplexer'},
+		{ label: 'Выбрать мультиплексор/демультиплексор', id: 'multiplexer'},
 		{ label: 'Выбрать триггер', id: 'trigger'},
 		{ label: 'Выбрать счетчик', id:'counter'},
 		{ label: 'Выбрать регистр', id: 'registor'},
