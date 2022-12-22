@@ -2,13 +2,13 @@ import { inputOutputStyleHR, inputStyleDiv, outputStyleDiv, elementContainerStyl
 export const LogicalElement = (props) => {
 	const { elementType, isInversed, inputsCount } = props;
 	console.log(props);
-	const heightStyle = 60 + 5 * inputsCount;
+	const heightStyle = 70 + 5 * inputsCount;
 	const elementStyle = {
 		background: 'white',
-		width: '50px',
+		width: '60px',
 		height: heightStyle + 'px',
-		border: '1px solid black',
-		textAlign: 'right',
+		border: '3px solid black',
+		textAlign: 'center',
 	};
 
 	const elementTypeGOST = () => {

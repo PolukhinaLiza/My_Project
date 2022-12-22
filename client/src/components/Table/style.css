@@ -1,0 +1,10 @@
+@font-face {
+	font-family: 'Gost';
+	src: url('./gost_2_304-81_type_b.ttf') format('truetype');
+}
+
+tr,
+td {
+	font-family: 'Gost';
+    font-size: 13px;
+}

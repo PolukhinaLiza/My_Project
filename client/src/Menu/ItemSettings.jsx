@@ -150,6 +150,9 @@ export const ItemSettings = (props) => {
 				</div>
 			))}
 			<button type='submit' class='btn btn-outline-dark'>
+				Отмена
+			</button>
+			<button type='submit' class='btn btn-outline-dark'>
 				Добавить элемент
 			</button>
 		</form>

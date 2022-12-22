@@ -5,10 +5,9 @@ import update from 'react-addons-update';
 import { DraggableElement } from './DraggablElement';
 
 const styles = {
-	width: 3000,
-	height: 3000,
-	border: '1px solid black',
-	position: 'relative',
+	width: '4961px',
+	height: '3508px',
+	position: 'absolute',
 };
 
 export const GridElements = (props) => {

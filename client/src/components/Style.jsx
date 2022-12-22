@@ -1,7 +1,6 @@
 export const inputOutputStyleHR = {
     width: '10px',
-    border: '1px solid black !important',
-    color: '#000 !important',
+    border: '1px solid black',
     margin: '5px 0',
     opacity: '1'
 };
@@ -38,4 +37,9 @@ export const outputStyleDiv = {
 export const elementContainerStyle = {
     display: 'flex',
     flexDirection: 'row',
+};
+
+export const elementContainerTableStyle = {
+    display: 'flex',
+    flexDirection: 'column',
 };
