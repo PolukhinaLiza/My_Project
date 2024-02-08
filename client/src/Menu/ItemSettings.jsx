@@ -141,7 +141,7 @@ export const ItemSettings = (props) => {
 							))}
 						</select>
 					) : (
-						//TODO:  Добавить валидацию Добавить значение по умолчанию
+						
 						<input
 							style={styleElement}
 							name={inputInfo.fieldName}

@@ -15,7 +15,6 @@ export const GridElements = (props) => {
 	const [elements, setElements] = useState({});
 
 	useEffect(() => {
-		console.log(initialElements, 'liza');
 		setElements(initialElements);
 	}, [initialElements]);
 
