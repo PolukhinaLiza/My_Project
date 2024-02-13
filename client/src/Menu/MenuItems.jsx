@@ -1,3 +1,12 @@
+import Popup from 'reactjs-popup';
+import Userfront, { SignupForm, LoginForm } from '@userfront/toolkit/react';
+
+Userfront.init('wn98vj9b');
+
+const stylePopup = {
+	position: 'absolute',
+	placement: 'center',
+};
 export const MenuItems = (props) => {
 	const { selectElement, downloadPdf, setIsWiresModEnabled } = props;
 	const availableElements = [
@@ -10,6 +19,7 @@ export const MenuItems = (props) => {
 		{ label: 'Выбрать компаратор', id: 'comparator' },
 		{ label: 'Выбрать сумматор', id: 'summator' },
 	];
+	const showPopup = !Userfront.tokens.accessToken;
 	//dropdown-toggle
 	return (
 		<nav class='navbar navbar-expand-sm bg-dark navbar-dark'>
@@ -24,14 +34,73 @@ export const MenuItems = (props) => {
 					</li>
 				))}
 				<li>
-					<button class='btn btn-dark ' onClick={downloadPdf}>Загрузить PDF</button>
+					<button class='btn btn-dark ' onClick={downloadPdf}>
+						Загрузить PDF
+					</button>
 				</li>
 				<li>
-					<button class='btn btn-dark ' onClick={() => setIsWiresModEnabled(true)}>Режим добавления проводов</button>
+					<button
+						class='btn btn-dark '
+						onClick={() => setIsWiresModEnabled(true)}>
+						Режим добавления проводов
+					</button>
 				</li>
 				<li>
-					<button class='btn btn-dark ' >Показать схему</button>
+					<button class='btn btn-dark '>Показать схему</button>
 				</li>
+
+				{showPopup && (
+					<>
+						<li>
+							<Popup
+								trigger={<button class='btn btn-dark '>Login</button>}
+								style={stylePopup}
+								closeOnDocumentClick
+								arrowStyle={{ color: '#2a2e2d' }}>
+								<div className='popover-content'>
+									<LoginForm style={stylePopup} />
+								</div>
+							</Popup>
+						</li>
+						<li>
+							<Popup
+								trigger={<button class='btn btn-dark '>Signup</button>}
+								position={[
+									'top left',
+									'top right',
+									'bottom left',
+									'bottom right',
+								]}
+								closeOnDocumentClick
+								arrowStyle={{ color: '#2a2e2d' }}>
+								<div className='popover-content'>
+									<SignupForm />
+								</div>
+							</Popup>
+						</li>
+					</>
+				)}
+				{!showPopup && (
+					<>
+						<li>
+							<button class='btn btn-dark ' onClick={downloadPdf}>
+								Мои схемы
+							</button>
+						</li>
+						<li>
+							<button class='btn btn-dark ' onClick={downloadPdf}>
+								Сохранить схему
+							</button>
+						</li>
+						<li>
+							<button class='btn btn-dark ' onClick={Userfront.logout}>
+								Logout
+							</button>
+						</li>
+					</>
+				)}
+
+				<li></li>
 			</ul>
 		</nav>
 	);
