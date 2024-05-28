@@ -8,7 +8,14 @@ const stylePopup = {
 	placement: 'center',
 };
 export const MenuItems = (props) => {
-	const { selectElement, downloadPdf, setIsWiresModEnabled } = props;
+	const {
+		selectElement,
+		downloadPdf,
+		setIsWiresModEnabled,
+		saveScheme,
+		setSchemeName,
+		schemeName,
+	} = props;
 	const availableElements = [
 		{ label: 'Выбрать логический элемент', id: 'logicalElement' },
 		{ label: 'Выбрать дешифратор/шифратор', id: 'decoder' },
@@ -88,9 +95,41 @@ export const MenuItems = (props) => {
 							</button>
 						</li>
 						<li>
-							<button class='btn btn-dark ' onClick={downloadPdf}>
-								Сохранить схему
-							</button>
+							<Popup
+								trigger={<button class='btn btn-dark '>Сохранить схему</button>}
+								position={[
+									'top left',
+									'top right',
+									'bottom left',
+									'bottom right',
+								]}
+								closeOnDocumentClick
+								arrowStyle={{ color: '#2a2e2d' }}>
+								<div className='popover-content'>
+									<form style={{ border: '0.76px solid black' }}>
+										<div class='form-group'>
+											<label style={{ margin: '10px' }}>
+												Введите название схемы
+											</label>
+											<input
+												type='text'
+												class='form-control'
+												style={{ margin: '10px' }}
+												placeholder='Введите название схемы'
+												value={schemeName}
+												onChange={(event) =>
+													setSchemeName(event.target.value)
+												}></input>
+										</div>
+										<button
+											class='btn btn-dark'
+											onClick={saveScheme}
+											style={{ margin: '10px' }}>
+											Сохранить
+										</button>
+									</form>
+								</div>
+							</Popup>
 						</li>
 						<li>
 							<button class='btn btn-dark ' onClick={Userfront.logout}>

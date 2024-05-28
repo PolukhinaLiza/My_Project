@@ -56,6 +56,8 @@ const App = () => {
 	const [isWiresModEnabled, setIsWiresModEnabled] = useState(false);
 	const [startPoint, setStartPoint] = useState(null);
 	const [elementsOnGrid, updateElementsOnGrid] = useState({});
+	const [schemeName, setSchemeName] = useState('Схема №1');
+	const [isnewScheme, setIsNewScheme] = useState(true);
 	const addElement = (props) => {
 		const elementWidth = 150;
 		const elementHeight = 200;
@@ -93,6 +95,33 @@ const App = () => {
 		pdf.save('a3.pdf');
 	};
 
+	const saveScheme = async () => {
+		const userData = Userfront.user.uuid;
+
+		let validate = await fetch('http://localhost:3001/schemes/validate', {
+			method: 'post',
+			body: JSON.stringify({ userData, schemeName }),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		validate = await validate.json();
+		console.warn(validate);
+		if (validate) {
+			alert('Файл с таким названием уже существует!');
+		}
+		let save = await fetch('http://localhost:3001/schemes/save', {
+			method: 'post',
+			body: JSON.stringify({ userData, schemeName, elementsOnGrid }),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+	};
+
+	const changeIsNewScheme = () => {
+		setIsNewScheme(false);
+	};
 	return (
 		<Router>
 			<div>
@@ -100,6 +129,9 @@ const App = () => {
 					addElement={addElement}
 					downloadPdf={exportPdf}
 					setIsWiresModEnabled={setIsWiresModEnabled}
+					saveScheme={saveScheme}
+					setSchemeName={setSchemeName}
+					schemeName={schemeName}
 				/>
 				<div style={styles} ref={exportRef}>
 					<table style={style2}>
