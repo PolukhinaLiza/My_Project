@@ -200,12 +200,6 @@ const App = () => {
             <Table />
           </table>
         </div>
-
-        <button
-          class='btn btn-dark '
-          onClick={() => setIsWiresModEnabled(true)}>
-          Показать меню
-        </button>
       </div>
     </>
   );
