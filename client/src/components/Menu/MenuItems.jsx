@@ -55,9 +55,6 @@ export const MenuItems = (props) => {
             Загрузить PDF
           </button>
         </li>
-        <li>
-          <button class='btn btn-dark '>Показать схему</button>
-        </li>
 
         {showPopup && (
           <>
