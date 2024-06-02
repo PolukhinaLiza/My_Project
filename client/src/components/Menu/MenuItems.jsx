@@ -7,6 +7,7 @@ const stylePopup = {
   position: 'absolute',
   placement: 'center',
 };
+
 export const MenuItems = (props) => {
   const {
     selectElement,
