@@ -96,24 +96,22 @@ export const MenuItems = (props) => {
             <li>
               <Popup
                 trigger={<button class='btn btn-dark '>Сохранить схему</button>}
-                position={[
-                  'top left',
-                  'top right',
-                  'bottom left',
-                  'bottom right',
-                ]}
+                offsetY={25}
                 closeOnDocumentClick
                 arrowStyle={{ color: '#2a2e2d' }}>
                 <div className='popover-content'>
-                  <form style={{ border: '0.76px solid black' }}>
-                    <div class='form-group'>
-                      <label style={{ margin: '10px' }}>
+                  <form
+                    style={{
+                      border: '0.76px solid black',
+                      background: '#fff',
+                    }}>
+                    <div class='form-group' style={{ padding: '10px' }}>
+                      <label style={{ marginBottom: '10px' }}>
                         Введите название схемы
                       </label>
                       <input
                         type='text'
                         class='form-control'
-                        style={{ margin: '10px' }}
                         placeholder='Введите название схемы'
                         value={schemeName}
                         onChange={(event) =>
