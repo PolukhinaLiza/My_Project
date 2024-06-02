@@ -3,7 +3,7 @@ import { useState, useRef } from 'react';
 import Userfront from '@userfront/toolkit/react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import html2canvas, { jsPDF } from 'jspdf-html2canvas';
+import html2pdf from 'jspdf-html2canvas';
 import { ReactNotifications } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 
@@ -29,7 +29,7 @@ const styles = {
 
 const style2 = {
   width: '1946px',
-  height: '1388px',
+  height: '1375px',
   margin: '7.6px 7.6px 7.6px 30.4px',
   border: '0.76px solid black',
   position: 'absolute',
@@ -79,22 +79,20 @@ const App = () => {
 
   const canvasRef = useRef(null);
   const exportRef = useRef(null);
+
   const exportPdf = async () => {
-    const element = exportRef.current;
+    const pdfContent = exportRef.current;
 
-    const canvas = await html2canvas(element);
-    const data = canvas.toDataURL('image/png');
-    const pdf = new jsPDF({
-      orientation: 'l',
-      format: 'a3',
+    html2pdf(pdfContent, {
+      jsPDF: {
+        format: 'a3',
+        orientation: 'l',
+        unit: 'px',
+      },
+      imageType: 'image/jpeg',
+      output: 'a3.pdf',
+      margin: [7.6, 7.6, 7.6, 30.4],
     });
-    const imgProperties = pdf.getImageProperties(data);
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
-
-    pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight);
-    console.log('img2');
-    pdf.save('a3.pdf');
   };
 
   const saveScheme = () => {
@@ -204,8 +202,8 @@ const App = () => {
           schemeName={schemeName}
           loadExistingScheme={loadExistingScheme}
         />
-        <div style={styles} ref={exportRef}>
-          <table style={style2}>
+        <div style={styles}>
+          <table style={style2} ref={exportRef}>
             <canvas
               ref={canvasRef}
               id='canvas'
