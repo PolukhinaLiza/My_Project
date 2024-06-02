@@ -12,7 +12,8 @@ import { CustomDragLayer } from './components/CustomDragLayer.jsx';
 import { Menu } from './components/Menu/Menu';
 import { Table } from './components/Table/Table';
 
-import { useNotifications } from './hooks/useNotifications.jsx';
+import { useAuthNotifications } from './hooks/useAuthNotifications.jsx';
+import { sendNotification } from './utils/sendNotification.js';
 
 Userfront.init('wn98vj9b');
 
@@ -93,6 +94,8 @@ const App = () => {
       output: 'a3.pdf',
       margin: [7.6, 7.6, 7.6, 30.4],
     });
+
+    sendNotification('PDF-файл успешно загружен', 'success');
   };
 
   const saveScheme = () => {
@@ -107,6 +110,8 @@ const App = () => {
         { name: schemeName, scheme, elementsOnGrid },
       ])
     );
+
+    sendNotification(`Схема "${schemeName}" успешно сохранена`, 'success');
 
     // const userData = Userfront.user.uuid;
     // let validate = await fetch('http://localhost:3001/schemes/validate', {
@@ -139,9 +144,10 @@ const App = () => {
     wiresImage.onload = function () {
       canvasRef.current.getContext('2d').drawImage(wiresImage, 0, 0);
     };
-  };
 
-  useNotifications();
+    sendNotification(`Схема "${schemeName}" успешно загружена`, 'success');
+  };
+  useAuthNotifications();
 
   // Drawing wires
 
