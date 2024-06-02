@@ -127,6 +127,11 @@ const App = () => {
 
   // Drawing wires
 
+  const enableWiresMod = () => {
+    setIsWiresModEnabled(true);
+    canvasRef.current.style.zIndex = 10;
+  };
+
   const getPointCoordinates = (e) => {
     const canvasPosition = canvasRef.current.getBoundingClientRect();
     const { left: canvasX, top: canvasY } = canvasPosition;
@@ -173,7 +178,7 @@ const App = () => {
         <Menu
           addElement={addElement}
           downloadPdf={exportPdf}
-          setIsWiresModEnabled={setIsWiresModEnabled}
+          setIsWiresModEnabled={enableWiresMod}
           saveScheme={saveScheme}
           setSchemeName={setSchemeName}
           schemeName={schemeName}
