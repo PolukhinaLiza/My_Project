@@ -101,6 +101,10 @@ export const MenuItems = (props) => {
                 arrowStyle={{ color: '#2a2e2d' }}>
                 <div className='popover-content'>
                   <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      saveScheme();
+                    }}
                     style={{
                       border: '0.76px solid black',
                       background: '#fff',
@@ -118,10 +122,7 @@ export const MenuItems = (props) => {
                           setSchemeName(event.target.value)
                         }></input>
                     </div>
-                    <button
-                      class='btn btn-dark'
-                      onClick={saveScheme}
-                      style={{ margin: '10px' }}>
+                    <button class='btn btn-dark' style={{ margin: '10px' }}>
                       Сохранить
                     </button>
                   </form>

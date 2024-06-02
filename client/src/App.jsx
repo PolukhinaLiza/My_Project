@@ -95,28 +95,40 @@ const App = () => {
     pdf.save('a3.pdf');
   };
 
-  const saveScheme = async () => {
-    const userData = Userfront.user.uuid;
+  const saveScheme = () => {
+    const context = canvasRef.current.getContext('2d');
+    const savedScheme = canvasRef.current.getContext('2d');
+    console.log('Test', 'scheme', schemeName, savedScheme);
 
-    let validate = await fetch('http://localhost:3001/schemes/validate', {
-      method: 'post',
-      body: JSON.stringify({ userData, schemeName }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    validate = await validate.json();
-    console.warn(validate);
-    if (validate) {
-      alert('Файл с таким названием уже существует!');
-    }
-    let save = await fetch('http://localhost:3001/schemes/save', {
-      method: 'post',
-      body: JSON.stringify({ userData, schemeName, elementsOnGrid }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const uid = Userfront.tokens.accessToken;
+    console.log('Test', 'uid', uid);
+
+    const userSchemes = JSON.parse(localStorage.getItem(uid)) || [];
+    localStorage.setItem(
+      uid,
+      JSON.stringify([...userSchemes, { name: schemeName, context }])
+    );
+
+    // const userData = Userfront.user.uuid;
+    // let validate = await fetch('http://localhost:3001/schemes/validate', {
+    //   method: 'post',
+    //   body: JSON.stringify({ userData, schemeName }),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // });
+    // validate = await validate.json();
+    // console.warn(validate);
+    // if (validate) {
+    //   alert('Файл с таким названием уже существует!');
+    // }
+    // let save = await fetch('http://localhost:3001/schemes/save', {
+    //   method: 'post',
+    //   body: JSON.stringify({ userData, schemeName, elementsOnGrid }),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // });
   };
 
   const changeIsNewScheme = () => {
