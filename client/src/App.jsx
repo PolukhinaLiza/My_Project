@@ -1,13 +1,14 @@
-import { Menu } from './Menu/Menu';
 import { useState, useRef } from 'react';
-import html2canvas, { jsPDF } from 'jspdf-html2canvas';
-import { GridElements } from './components/GridElements';
-import { CustomDragLayer } from './components/CustomDragLayer.jsx';
+
+import Userfront from '@userfront/toolkit/react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import html2canvas, { jsPDF } from 'jspdf-html2canvas';
+
+import { GridElements } from './components/GridElements';
+import { CustomDragLayer } from './components/CustomDragLayer.jsx';
+import { Menu } from './components/Menu/Menu';
 import { Table } from './components/Table/Table';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Userfront from '@userfront/toolkit/react';
 
 Userfront.init('wn98vj9b');
 
@@ -118,56 +119,52 @@ const App = () => {
   };
 
   return (
-    <Router>
-      <div>
-        <Menu
-          addElement={addElement}
-          downloadPdf={exportPdf}
-          setIsWiresModEnabled={setIsWiresModEnabled}
-          saveScheme={saveScheme}
-          setSchemeName={setSchemeName}
-          schemeName={schemeName}
-        />
-        <div style={styles} ref={exportRef}>
-          <table style={style2}>
-            <canvas
-              ref={canvasRef}
-              id='canvas'
-              style={styleClick}
-              onClick={(e) => {
-                if (isWiresModEnabled) {
-                  const ctx = canvasRef.current.getContext('2d');
-                  if (startPoint === null) {
-                    setStartPoint({ x: e.pageX, y: e.pageY });
-                  } else {
-                    ctx.beginPath();
-                    ctx.moveTo(startPoint.x - 100, startPoint.y - 131);
-                    ctx.lineTo(e.pageX - 100, e.pageY - 130);
-                    ctx.stroke();
-                    setStartPoint(null);
-                  }
+    <div>
+      <Menu
+        addElement={addElement}
+        downloadPdf={exportPdf}
+        setIsWiresModEnabled={setIsWiresModEnabled}
+        saveScheme={saveScheme}
+        setSchemeName={setSchemeName}
+        schemeName={schemeName}
+      />
+      <div style={styles} ref={exportRef}>
+        <table style={style2}>
+          <canvas
+            ref={canvasRef}
+            id='canvas'
+            style={styleClick}
+            onClick={(e) => {
+              if (isWiresModEnabled) {
+                const ctx = canvasRef.current.getContext('2d');
+                if (startPoint === null) {
+                  setStartPoint({ x: e.pageX, y: e.pageY });
+                } else {
+                  ctx.beginPath();
+                  ctx.moveTo(startPoint.x - 100, startPoint.y - 131);
+                  ctx.lineTo(e.pageX - 100, e.pageY - 130);
+                  ctx.stroke();
+                  setStartPoint(null);
                 }
-              }}
-            />
-            <div style={style3}></div>
-            {Object.keys(elementsOnGrid).length ? (
-              <DndProvider backend={HTML5Backend}>
-                <GridElements initialElements={elementsOnGrid} />
-                <CustomDragLayer />
-              </DndProvider>
-            ) : null}
+              }
+            }}
+          />
+          <div style={style3}></div>
+          {Object.keys(elementsOnGrid).length ? (
+            <DndProvider backend={HTML5Backend}>
+              <GridElements initialElements={elementsOnGrid} />
+              <CustomDragLayer />
+            </DndProvider>
+          ) : null}
 
-            <Table />
-          </table>
-        </div>
-
-        <button
-          class='btn btn-dark '
-          onClick={() => setIsWiresModEnabled(true)}>
-          Показать меню
-        </button>
+          <Table />
+        </table>
       </div>
-    </Router>
+
+      <button class='btn btn-dark ' onClick={() => setIsWiresModEnabled(true)}>
+        Показать меню
+      </button>
+    </div>
   );
 };
 

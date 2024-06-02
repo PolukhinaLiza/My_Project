@@ -27,7 +27,8 @@ export const MenuItems = (props) => {
     { label: 'Выбрать сумматор', id: 'summator' },
   ];
   const showPopup = !Userfront.tokens.accessToken;
-  //dropdown-toggle
+
+  // dropdown-toggle
   return (
     <nav class='navbar navbar-expand-sm bg-dark navbar-dark'>
       <ul class='navbar-nav'>
