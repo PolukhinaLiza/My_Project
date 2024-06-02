@@ -53,10 +53,11 @@ const style3 = {
 
 const App = () => {
   const [isWiresModEnabled, setIsWiresModEnabled] = useState(false);
-  const [startPoint, setStartPoint] = useState(null);
+  const [isWireProcess, setIsWireProcess] = useState(false);
+
   const [elementsOnGrid, updateElementsOnGrid] = useState({});
   const [schemeName, setSchemeName] = useState('Схема №1');
-  const [isnewScheme, setIsNewScheme] = useState(true);
+  const [isNewScheme, setIsNewScheme] = useState(true);
   const addElement = (props) => {
     const elementWidth = 150;
     const elementHeight = 200;
@@ -124,6 +125,47 @@ const App = () => {
 
   useNotifications();
 
+  // Drawing wires
+
+  const getPointCoordinates = (e) => {
+    const canvasPosition = canvasRef.current.getBoundingClientRect();
+    const { left: canvasX, top: canvasY } = canvasPosition;
+
+    const { clientX: clickOffsetX, clientY: clickOffsetY } = e;
+
+    return {
+      x: clickOffsetX - canvasX,
+      y: clickOffsetY - canvasY,
+    };
+  };
+
+  const handleCanvasClick = (event) => {
+    const context = canvasRef.current.getContext('2d');
+    const { x, y } = getPointCoordinates(event);
+
+    if (!isWireProcess) {
+      setIsWireProcess(true);
+
+      context.beginPath();
+      context.moveTo(x, y);
+    } else {
+      context.lineTo(x, y);
+
+      context.strokeStyle = '#000';
+      context.lineWidth = 1;
+      context.stroke();
+
+      context.beginPath();
+      context.moveTo(x, y);
+    }
+  };
+
+  const handleCanvasDoubleClick = () => {
+    setIsWireProcess(false);
+  };
+
+  //
+
   return (
     <>
       <ReactNotifications />
@@ -142,20 +184,10 @@ const App = () => {
               ref={canvasRef}
               id='canvas'
               style={styleClick}
-              onClick={(e) => {
-                if (isWiresModEnabled) {
-                  const ctx = canvasRef.current.getContext('2d');
-                  if (startPoint === null) {
-                    setStartPoint({ x: e.pageX, y: e.pageY });
-                  } else {
-                    ctx.beginPath();
-                    ctx.moveTo(startPoint.x - 100, startPoint.y - 131);
-                    ctx.lineTo(e.pageX - 100, e.pageY - 130);
-                    ctx.stroke();
-                    setStartPoint(null);
-                  }
-                }
-              }}
+              width={1946}
+              height={1388}
+              onClick={isWiresModEnabled && handleCanvasClick}
+              onDoubleClick={isWiresModEnabled && handleCanvasDoubleClick}
             />
             <div style={style3}></div>
             {Object.keys(elementsOnGrid).length ? (
