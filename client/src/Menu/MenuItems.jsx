@@ -74,12 +74,7 @@ export const MenuItems = (props) => {
                 trigger={
                   <button class='btn btn-dark '>Зарегистрироваться</button>
                 }
-                position={[
-                  'top left',
-                  'top right',
-                  'bottom left',
-                  'bottom right',
-                ]}
+                offsetX={-145}
                 closeOnDocumentClick
                 arrowStyle={{ color: '#2a2e2d' }}>
                 <div className='popover-content'>
