@@ -58,6 +58,7 @@ const App = () => {
   const [elementsOnGrid, updateElementsOnGrid] = useState({});
   const [schemeName, setSchemeName] = useState('Схема №1');
   const [isNewScheme, setIsNewScheme] = useState(true);
+
   const addElement = (props) => {
     const elementWidth = 150;
     const elementHeight = 200;
@@ -75,6 +76,7 @@ const App = () => {
       },
     });
   };
+
   const canvasRef = useRef(null);
   const exportRef = useRef(null);
   const exportPdf = async () => {
@@ -96,17 +98,16 @@ const App = () => {
   };
 
   const saveScheme = () => {
-    const context = canvasRef.current.getContext('2d');
-    const savedScheme = canvasRef.current.getContext('2d');
-    console.log('Test', 'scheme', schemeName, savedScheme);
+    const scheme = canvasRef.current.toDataURL();
+    const uuid = Userfront.user.userUuid;
 
-    const uid = Userfront.tokens.accessToken;
-    console.log('Test', 'uid', uid);
-
-    const userSchemes = JSON.parse(localStorage.getItem(uid)) || [];
+    const currentUserSchemes = JSON.parse(localStorage.getItem(uuid)) || [];
     localStorage.setItem(
-      uid,
-      JSON.stringify([...userSchemes, { name: schemeName, context }])
+      uuid,
+      JSON.stringify([
+        ...currentUserSchemes,
+        { name: schemeName, scheme, elementsOnGrid },
+      ])
     );
 
     // const userData = Userfront.user.uuid;
@@ -131,8 +132,15 @@ const App = () => {
     // });
   };
 
-  const changeIsNewScheme = () => {
+  const loadExistingScheme = (existingSchemeElements, existingSchemeWires) => {
     setIsNewScheme(false);
+    updateElementsOnGrid(existingSchemeElements);
+
+    const wiresImage = new Image();
+    wiresImage.src = existingSchemeWires;
+    wiresImage.onload = function () {
+      canvasRef.current.getContext('2d').drawImage(wiresImage, 0, 0);
+    };
   };
 
   useNotifications();
@@ -194,6 +202,7 @@ const App = () => {
           saveScheme={saveScheme}
           setSchemeName={setSchemeName}
           schemeName={schemeName}
+          loadExistingScheme={loadExistingScheme}
         />
         <div style={styles} ref={exportRef}>
           <table style={style2}>

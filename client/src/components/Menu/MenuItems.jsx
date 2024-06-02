@@ -16,6 +16,7 @@ export const MenuItems = (props) => {
     saveScheme,
     setSchemeName,
     schemeName,
+    loadExistingScheme,
   } = props;
   const availableElements = [
     { label: 'Выбрать логический элемент', id: 'logicalElement' },
@@ -89,9 +90,32 @@ export const MenuItems = (props) => {
         {!showPopup && (
           <>
             <li>
-              <button class='btn btn-dark ' onClick={downloadPdf}>
-                Мои схемы
-              </button>
+              <Popup
+                trigger={<button class='btn btn-dark '>Мои схемы</button>}
+                modal
+                overlayStyle={{ background: 'rgba(0, 0, 0, 0.5)' }}
+                contentStyle={{ background: '#fff', padding: '15px' }}>
+                <div className='popover-content'>
+                  <div>
+                    Сохранённые схемы пользователя {Userfront.user.email}
+                  </div>
+                  <ul>
+                    {JSON.parse(
+                      localStorage.getItem(Userfront.user.userUuid)
+                    )?.map((scheme) => (
+                      <button
+                        onClick={() =>
+                          loadExistingScheme(
+                            scheme.elementsOnGrid,
+                            scheme.scheme
+                          )
+                        }>
+                        {scheme.name}
+                      </button>
+                    ))}
+                  </ul>
+                </div>
+              </Popup>
             </li>
             <li>
               <Popup
