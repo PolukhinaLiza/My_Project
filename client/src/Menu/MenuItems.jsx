@@ -60,7 +60,7 @@ export const MenuItems = (props) => {
           <>
             <li>
               <Popup
-                trigger={<button class='btn btn-dark '>Login</button>}
+                trigger={<button class='btn btn-dark '>Войти</button>}
                 style={stylePopup}
                 closeOnDocumentClick
                 arrowStyle={{ color: '#2a2e2d' }}>
@@ -71,7 +71,9 @@ export const MenuItems = (props) => {
             </li>
             <li>
               <Popup
-                trigger={<button class='btn btn-dark '>Signup</button>}
+                trigger={
+                  <button class='btn btn-dark '>Зарегистрироваться</button>
+                }
                 position={[
                   'top left',
                   'top right',
@@ -133,7 +135,7 @@ export const MenuItems = (props) => {
             </li>
             <li>
               <button class='btn btn-dark ' onClick={Userfront.logout}>
-                Logout
+                Выйти
               </button>
             </li>
           </>
