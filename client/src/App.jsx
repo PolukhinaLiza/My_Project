@@ -142,7 +142,11 @@ const App = () => {
     const wiresImage = new Image();
     wiresImage.src = existingSchemeWires;
     wiresImage.onload = function () {
-      canvasRef.current.getContext('2d').drawImage(wiresImage, 0, 0);
+      const canvas = canvasRef.current;
+      const context = canvas.getContext('2d');
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(wiresImage, 0, 0);
     };
 
     sendNotification(`Схема "${schemeName}" успешно загружена`, 'success');
@@ -222,7 +226,10 @@ const App = () => {
             <div style={style3}></div>
             {Object.keys(elementsOnGrid).length ? (
               <DndProvider backend={HTML5Backend}>
-                <GridElements initialElements={elementsOnGrid} />
+                <GridElements
+                  initialElements={elementsOnGrid}
+                  updateElements={updateElementsOnGrid}
+                />
                 <CustomDragLayer />
               </DndProvider>
             ) : null}
